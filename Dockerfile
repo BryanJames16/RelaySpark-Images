@@ -1,5 +1,9 @@
 FROM alpine:3.23 AS base
 
+# User Setup
+RUN addgroup -S docker && adduser -S musketeer -G docker
+USER musketeer
+
 # Install Three Musketeers Base Tools: 
 # - Docker
 # - Compose
