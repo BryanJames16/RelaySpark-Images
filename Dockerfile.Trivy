@@ -1,0 +1,15 @@
+FROM alpine:3.23
+
+ARG TRIVY_VERSION=0.65.0
+
+# Supports Trivy filesystem, image, and repository scanning workflows.
+RUN apk add --no-cache bash curl git make tar gzip ca-certificates
+RUN curl --fail --silent --show-error --location \
+    "https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz" \
+    --output /tmp/trivy.tar.gz && \
+    tar -xzf /tmp/trivy.tar.gz -C /usr/local/bin trivy && \
+    rm /tmp/trivy.tar.gz
+
+WORKDIR /workspace
+
+CMD ["/bin/sh"]

@@ -1,0 +1,9 @@
+FROM node:22-alpine
+
+# Supports npm, Angular CLI, pa11y-ci, and axe-scan based jobs.
+RUN apk add --no-cache bash git make
+RUN npm install --global @angular/cli axe-scan pa11y-ci
+
+WORKDIR /workspace
+
+CMD ["/bin/sh"]

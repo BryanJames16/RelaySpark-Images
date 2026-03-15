@@ -1,0 +1,9 @@
+FROM rust:1.89-alpine
+
+# Supports cargo build, test, package, fmt, clippy, and check workflows.
+RUN apk add --no-cache bash git make musl-dev
+RUN rustup component add rustfmt clippy
+
+WORKDIR /workspace
+
+CMD ["/bin/sh"]

@@ -1,0 +1,15 @@
+FROM alpine:3.23
+
+ARG OPENTOFU_VERSION=1.10.6
+
+# Supports OpenTofu init, validate, plan, and destroy workflows.
+RUN apk add --no-cache bash curl git make unzip ca-certificates
+RUN curl --fail --silent --show-error --location \
+    "https://github.com/opentofu/opentofu/releases/download/v${OPENTOFU_VERSION}/tofu_${OPENTOFU_VERSION}_linux_amd64.zip" \
+    --output /tmp/tofu.zip && \
+    unzip /tmp/tofu.zip -d /usr/local/bin && \
+    rm /tmp/tofu.zip
+
+WORKDIR /workspace
+
+CMD ["/bin/sh"]

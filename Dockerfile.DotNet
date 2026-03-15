@@ -1,0 +1,8 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine
+
+# Supports dotnet build, clean, test, and publish workflows.
+RUN apk add --no-cache bash git make
+
+WORKDIR /workspace
+
+CMD ["/bin/sh"]

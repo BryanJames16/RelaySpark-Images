@@ -1,0 +1,23 @@
+FROM alpine:3.23
+
+ARG HELM_VERSION=3.19.0
+ARG KUBESEC_VERSION=2.14.2
+
+# Supports helm, kubesec, and yamale-based chart and manifest workflows.
+RUN apk add --no-cache bash curl git make tar gzip ca-certificates python3 py3-pip
+RUN curl --fail --silent --show-error --location \
+    "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" \
+    --output /tmp/helm.tar.gz && \
+    tar -xzf /tmp/helm.tar.gz -C /tmp && \
+    mv /tmp/linux-amd64/helm /usr/local/bin/helm && \
+    rm -rf /tmp/helm.tar.gz /tmp/linux-amd64
+RUN curl --fail --silent --show-error --location \
+    "https://github.com/controlplaneio/kubesec/releases/download/v${KUBESEC_VERSION}/kubesec_linux_amd64.tar.gz" \
+    --output /tmp/kubesec.tar.gz && \
+    tar -xzf /tmp/kubesec.tar.gz -C /usr/local/bin kubesec && \
+    rm /tmp/kubesec.tar.gz
+RUN pip install --no-cache-dir --break-system-packages yamale
+
+WORKDIR /workspace
+
+CMD ["/bin/sh"]

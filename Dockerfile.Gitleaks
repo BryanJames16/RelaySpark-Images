@@ -1,0 +1,15 @@
+FROM alpine:3.23
+
+ARG GITLEAKS_VERSION=8.24.2
+
+# Supports gitleaks directory and git repository scanning workflows.
+RUN apk add --no-cache bash curl git make tar gzip ca-certificates
+RUN curl --fail --silent --show-error --location \
+    "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" \
+    --output /tmp/gitleaks.tar.gz && \
+    tar -xzf /tmp/gitleaks.tar.gz -C /usr/local/bin gitleaks && \
+    rm /tmp/gitleaks.tar.gz
+
+WORKDIR /workspace
+
+CMD ["/bin/sh"]

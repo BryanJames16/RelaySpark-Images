@@ -1,0 +1,9 @@
+FROM python:3.13-alpine
+
+# Supports Hawk Eye secret and data source scanning workflows.
+RUN apk add --no-cache bash git make
+RUN pip install --no-cache-dir hawk-eye-scanner
+
+WORKDIR /workspace
+
+CMD ["/bin/sh"]

@@ -1,0 +1,15 @@
+FROM alpine:3.23
+
+ARG TERRAFORM_VERSION=1.12.2
+
+# Supports terraform init, validate, plan, apply, and destroy workflows.
+RUN apk add --no-cache bash curl git make unzip ca-certificates
+RUN curl --fail --silent --show-error --location \
+    "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip" \
+    --output /tmp/terraform.zip && \
+    unzip /tmp/terraform.zip -d /usr/local/bin && \
+    rm /tmp/terraform.zip
+
+WORKDIR /workspace
+
+CMD ["/bin/sh"]
