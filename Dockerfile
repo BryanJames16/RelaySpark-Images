@@ -8,10 +8,7 @@ LABEL description="Base three musketeer container image."
 # - Compose
 # - Make
 RUN apk update && \
-    apk add --no-cache docker=29.1.3-r2 && \
-    apk add --no-cache docker-cli=29.1.3-r2 && \
-    apk add --no-cache docker-cli-compose=2.40.3-r3 && \
-    apk add --no-cache make=4.4.1-r3
+    apk add --no-cache docker docker-cli docker-cli-compose make
 
 # Verify Core Tools
 RUN docker --version && \
@@ -19,7 +16,7 @@ RUN docker --version && \
     make --version
 
 # User Setup
-RUN addgroup -S docker && adduser -S musketeer -G docker
-USER musketeer
+RUN getent group docker >/dev/null 2>&1 || addgroup -S docker && \
+    adduser -S musketeer -G docker
 
 CMD ["/bin/sh"]
