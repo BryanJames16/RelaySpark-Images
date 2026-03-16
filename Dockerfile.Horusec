@@ -1,14 +1,13 @@
 FROM alpine:3.23
 
-ARG HORUSEC_VERSION=2.9.0
+ARG HORUSEC_VERSION=2.8.0
 
 # Supports Horusec source security scanning workflows.
 RUN apk add --no-cache bash curl git make tar gzip ca-certificates
 RUN curl --fail --silent --show-error --location \
-    "https://github.com/ZupIT/horusec/releases/download/v${HORUSEC_VERSION}/horusec_linux_amd64.tar.gz" \
-    --output /tmp/horusec.tar.gz && \
-    tar -xzf /tmp/horusec.tar.gz -C /usr/local/bin horusec && \
-    rm /tmp/horusec.tar.gz
+    "https://github.com/ZupIT/horusec/releases/download/v${HORUSEC_VERSION}/horusec_linux_amd64" \
+    --output /usr/local/bin/horusec && \
+    chmod +x /usr/local/bin/horusec
 
 WORKDIR /workspace
 

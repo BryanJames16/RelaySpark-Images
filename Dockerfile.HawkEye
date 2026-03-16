@@ -1,8 +1,24 @@
-FROM python:3.13-alpine
+FROM python:3.11-slim
 
 # Supports Hawk Eye secret and data source scanning workflows.
-RUN apk add --no-cache bash git make
-RUN pip install --no-cache-dir hawk-eye-scanner
+RUN apt-get update && apt-get install --yes --no-install-recommends bash git make && rm -rf /var/lib/apt/lists/*
+RUN pip install --no-cache-dir \
+    hawk-scanner --no-deps \
+    google-cloud-storage \
+    jmespath \
+    numpy \
+    opencv-python-headless \
+    openpyxl \
+    patool \
+    Pillow \
+    PyPDF2 \
+    pytesseract \
+    python-docx \
+    PyYAML \
+    requests \
+    rich \
+    setuptools \
+    tinydb
 
 WORKDIR /workspace
 
