@@ -1,6 +1,6 @@
 FROM alpine:3.23
 
-ARG TRIVY_VERSION=0.65.0
+ARG TRIVY_VERSION=0.69.3
 
 # Supports Trivy filesystem, image, and repository scanning workflows.
 RUN apk add --no-cache bash curl git make tar gzip ca-certificates
