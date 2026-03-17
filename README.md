@@ -18,4 +18,4 @@ Contributions are greatly appreciated and needed. Please feel free to open an is
 
 ## 📄 License
 
-MIT License - Copyright (c) 2025 Bryan James
+MIT License - Copyright (c) 2026 Bryan James
